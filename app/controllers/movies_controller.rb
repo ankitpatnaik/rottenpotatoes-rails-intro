@@ -13,12 +13,14 @@ class MoviesController < ApplicationController
   def index
       @all_ratings= Movie.all_ratings
      @column = params[:sort]
-    @ratings=params[:ratings]
+     @column=session[:sort]
+    @ratings=params[:ratings]||session[:ratings]||first_timerating
+    #@ratings = session [:ratings]
     @movies = Movie.where({rating: @ratings.keys}).order(@column)
     #@movies = Movie.order(params[:sort_by])
     #sorting at database level
-    
-    
+    session[:ratings]=@ratings
+   session[:sort]=@column
   end
 
   def new
@@ -50,3 +52,10 @@ class MoviesController < ApplicationController
   end
 
 end
+
+def first_timerating
+  hash={}
+  @all_ratings.each{|x| hash[x] ='1'}
+  hash
+end
+

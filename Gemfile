@@ -24,8 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
+# gem 'bcrypt', '~> 3.1.7'N
+gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -33,9 +33,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  
+  gem 'cucumber-rails', '~> 1.4.2', :require => false
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  
+  gem "cucumber-rails-training-wheels", :group => :test
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
 
@@ -53,5 +55,4 @@ group :production do
   gem 'pg' # for Heroku deployment
   gem 'rails_12factor'
 end
-
 

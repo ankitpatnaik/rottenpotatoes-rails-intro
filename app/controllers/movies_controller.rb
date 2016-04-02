@@ -42,6 +42,7 @@ class MoviesController < ApplicationController
     @movie.update_attributes!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully updated."
     redirect_to movie_path(@movie)
+    @director=Movie.directors
   end
 
   def destroy
@@ -58,4 +59,26 @@ def first_timerating
   @all_ratings.each{|x| hash[x] ='1'}
   hash
 end
+
+=begin
+ def directors
+    @movie = Movie.find(params[:id])
+    @movies = @movie.same_directors
+    if (@movies-[@movie]).empty?
+      flash[:notice] = "'#{@movie.title}' has no director info"
+      redirect_to movies_path
+    end
+ end
+=end
+  def same_director
+    id = params[:id]
+    @movie = Movie.find params [:id]
+    if (@movie.director.length == 0)
+      flash[:notice] = "'#{@movie.title}' has no director info."
+      redirect_to movies_path
+    end
+    @movies = Movie.find_by_director(@movie.director)
+  # @movie = Movie.find_by_director(params[:director])
+  end
+
 

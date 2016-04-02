@@ -13,8 +13,13 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+# get ':id/directors' => 'movies#director'
+#get 'movies/same_director/:director' => 'movies#same_director', :as => :same_director
 
+  get "/same_director" => "movies#same_director"
   resources :movies
+  
+
   
   # Example resource route with options:
   #   resources :products do
@@ -23,6 +28,7 @@ Rails.application.routes.draw do
   #       post 'toggle'
   #     end
   #
+  
   #     collection do
   #       get 'sold'
   #     end
